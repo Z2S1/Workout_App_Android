@@ -25,7 +25,10 @@ import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.runtime.*
 
 @Composable
-fun AdderButtons(){
+fun AdderButtons(
+    onExcerciseClick: () -> Unit,
+    onTextClick: () -> Unit
+){
     val colorBackground: Color = Color(0xFFC0C0C0)
     //For the excercise button
     val excerciseInteraction = remember { MutableInteractionSource() }
@@ -34,13 +37,14 @@ fun AdderButtons(){
     val textInteraction = remember { MutableInteractionSource() }
     val textIsPressed by textInteraction.collectIsPressedAsState()
 
+    Spacer(Modifier.padding(10.dp))
     Row(
         Modifier.padding(
             top = 8.dp
         )
     ) {
         Button(
-            onClick = {},
+            onClick =  onExcerciseClick,
             interactionSource = excerciseInteraction,
             colors = ButtonDefaults.buttonColors(
                 if (excerciseIsPressed) Color.DarkGray else Color(0xFFC0C0C0))
@@ -49,7 +53,7 @@ fun AdderButtons(){
         }
         Spacer(Modifier.padding(16.dp))
         Button(
-            onClick = {},
+            onClick = onTextClick,
             interactionSource = textInteraction,
             colors = ButtonDefaults.buttonColors(
                 if (textIsPressed) Color.DarkGray else Color(0xFFC0C0C0))

@@ -16,7 +16,6 @@ fun WorkOut(){
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(Modifier.padding(10.dp))
-        Spacer(Modifier.padding(10.dp))
         SeriesItem()
         SeriesItem()
         SeriesItem()
