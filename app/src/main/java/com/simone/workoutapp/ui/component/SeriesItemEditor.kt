@@ -30,17 +30,22 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
+import com.simone.workoutapp.data.model.SeriesEntity
+import com.simone.workoutapp.idGenerator
+import com.simone.workoutapp.ui.viewmodel.SeriesViewModel
 
 @Composable
 fun SeriesItemEditor(
+    viewModel: SeriesViewModel,
     deleteClicked: () -> Unit
 ){
-    val categories = listOf<String>("Cardio","Stength")
+    val categories = listOf<String>("Cardio","Strength")
     var selectedIndex by remember { mutableStateOf(0) }
 
     var excerciseInput by remember { mutableStateOf("") }
     var repetitionsInput by remember { mutableStateOf("") }
     var weightInput by remember { mutableStateOf("") }
+    var durationInput by remember { mutableStateOf("")}
 
     val deleteInteraction = remember { MutableInteractionSource() }
     val deleteIsPressed by deleteInteraction.collectIsPressedAsState()
@@ -110,14 +115,31 @@ fun SeriesItemEditor(
                 modifier = Modifier.fillMaxWidth(0.95f)
             )
             Spacer(Modifier.padding(4.dp))
+            OutlinedTextField(
+                value = durationInput,
+                onValueChange = {durationInput = it},
+                placeholder = {Text("Weight")},
+                modifier = Modifier.fillMaxWidth(0.95f)
+            )
         }
         Row(
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
             Button(
-                onClick = {},
-                interactionSource = deleteInteraction,
+                onClick = {
+                    viewModel.addSeries(
+                        SeriesEntity(
+                            id = idGenerator(),
+                            date = "2025-12-29",
+                            category = categories[selectedIndex],
+                            exercise = excerciseInput,
+                            repetitions = repetitionsInput.toInt(),
+                            weight = weightInput.toFloat(),
+                            duration = durationInput.toInt()
+                        )
+                    )
+                }
             ) {
                 Text("Add")
             }

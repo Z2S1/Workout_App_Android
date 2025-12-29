@@ -19,9 +19,10 @@ import com.simone.workoutapp.ui.component.SummaryCard
 import com.simone.workoutapp.ui.component.WorkOut
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.simone.workoutapp.ui.viewmodel.SeriesViewModel
 
 @Composable
-fun DailyWorkoutScreen(){
+fun DailyWorkoutScreen(viewModel: SeriesViewModel){
     val backgroundColor: Color = Color(0xFF3a6ea5)
     var editor by remember() { mutableStateOf(false)}
 
@@ -45,6 +46,7 @@ fun DailyWorkoutScreen(){
         )
         if (editor) {
             SeriesItemEditor(
+                viewModel,
                 deleteClicked = {
                     editor = false
                 }

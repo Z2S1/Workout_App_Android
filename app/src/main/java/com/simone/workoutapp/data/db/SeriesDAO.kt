@@ -1,11 +1,13 @@
 package com.simone.workoutapp.data.db
 
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.simone.workoutapp.data.model.SeriesEntity
 import kotlinx.coroutines.flow.Flow
 
+@Dao
 interface SeriesDAO {
 
     @Upsert
